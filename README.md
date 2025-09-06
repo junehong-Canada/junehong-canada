@@ -35,7 +35,7 @@ I apply machine learning to solve real-world problems with precision and scalabi
   - Predictive analytics & recommendation systems  
   - Time-series forecasting  
 
-I’ve built ML-powered features into mobile apps, cloud platforms, and embedded systems—bridging the gap between intelligent models and practical deployment.
+I am building ML-powered features into mobile apps, cloud platforms, and embedded systems—bridging the gap between intelligent models and practical deployment.
 
 ---
 
