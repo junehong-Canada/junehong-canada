@@ -14,7 +14,7 @@ With over **10 years of software development** and **12 years of management expe
 - Embedded OS: **REX OS**, **VxWorks**, **Nucleus**, **Embedded Linux**
 
 ### 🧑‍💻 Programming Languages
-- **Python**, **Java**, **C/C++**, **Kotlin (Android)**, **ARM Assembler**
+- **Python**, **Java**, **C/C++**, **Kotlin (Android)**, **Swift**, **ARM Assembler**
 - Web: **HTML**, **CSS**, **JavaScript**, **PHP**
 
 ### 🌐 Networking Protocols
