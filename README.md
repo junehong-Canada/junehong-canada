@@ -1,39 +1,70 @@
-### 👋 Hi, I’m June Hong.
-* I have ten years of software development experience and twelve years of management experience leading software teams at advanced software companies. 
-* I managed the development of a cloud-based device management platform for internet phones and software for smart mobile devices. 
-* I worked with the teams of Samsung, NTT, and NEC and delivered the cloud-based device management platform to NEC, multimedia SDK for mobile phones to Samsung, and android OS for tablets to NTT. 
-* With a significant amount of experience in leading the development of cloud-based applications and software for smart mobile devices, I have strong organizational planning and development, business judgment, technical leadership, and communication skills. 
-* I am enthusiastic 👀 about preventing potential problems and developing forward-thinking solutions.
-<br>
+# 👋 Hello, I'm June Hong
 
-#### ✨ Skills ✨ 
-##### 🌱 Platforms:
-- __SpringBoot, MongoDB, Amazon Web Service, Linux Server, Django REST framework, Docker, PostgreSQL, Redis, and MySQL__
-Embedded Linux, REX OS, VxWorks, and Nucleus
-##### 🌱 Programming:
-- C, C++, Java, HTML, CSS, JavaScript, PHP, __Python__, __Android - Kotlin__, ARM Assembler, and __Machine Learning TensorFlow 2.0__
-##### 🌱 Networking:
-- TCP/IP, HTTP/HTTPS, RTP/RTCP, Session Initiation Protocol (SIP), Wireless LAN - Wi-Fi, and Wireless WAN - TV White Space
-<br>
+🚀 **Software Architect | Technical Leader | Innovator**
 
-#### 💞️ My proudest professional achievements are 💞️ 
-* Desktop Android Video VoIP phones for NEC Corporation https://www.youtube.com/watch?v=3A7L3uexReE
-* Android Tablets for NTT https://www.youtube.com/watch?v=4Y1-JsDp3IM
-* SDMB Multimedia Mobile Phones for for SKTeletech https://www.youtube.com/watch?v=J0NPZWObpac
-<br>
+With over **10 years of software development** and **12 years of management experience**, I've led high-impact teams across global tech giants like **Samsung**, **NTT**, and **NEC**. My work spans **cloud platforms**, **smart mobile devices**, and **embedded systems**, delivering solutions that power millions of users.
 
-#### 📫 How to reach me ... 📫 
-* LinkedIn Profile: https://www.linkedin.com/in/junehong-dominicus
+---
 
-<!---
-- 👋 Hi, I’m @junehong-dominicus
-- 👀 I’m interested in ...
-- 🌱 I’m currently learning ...
-- 💞️ I’m looking to collaborate on ...
-- 📫 How to reach me ...
---->
+## 🧠 Expertise Snapshot
 
-<!---
-junehong-dominicus/junehong-dominicus is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+### 💻 Platforms & Frameworks
+- **Spring Boot**, **Django REST**, **MongoDB**, **PostgreSQL**, **Redis**, **MySQL**
+- **Amazon Web Services (AWS)**, **Docker**, **Linux Server**
+- Embedded OS: **REX OS**, **VxWorks**, **Nucleus**, **Embedded Linux**
+
+### 🧑‍💻 Programming Languages
+- **Python**, **Java**, **C/C++**, **Kotlin (Android)**, **ARM Assembler**
+- Web: **HTML**, **CSS**, **JavaScript**, **PHP**
+
+### 🌐 Networking Protocols
+- **TCP/IP**, **HTTP/HTTPS**, **RTP/RTCP**, **SIP**
+- Wireless: **Wi-Fi**, **TV White Space**
+
+---
+
+## 🤖 Machine Learning & AI
+
+I apply machine learning to solve real-world problems with precision and scalability. My experience spans:
+
+- **Frameworks & Libraries**: TensorFlow 2.0, Keras, scikit-learn, OpenCV  
+- **Techniques**: Supervised & Unsupervised Learning, CNNs, RNNs, Transfer Learning  
+- **Applications**:
+  - Image classification & object detection  
+  - Natural Language Processing (NLP)  
+  - Predictive analytics & recommendation systems  
+  - Time-series forecasting  
+
+I’ve built ML-powered features into mobile apps, cloud platforms, and embedded systems—bridging the gap between intelligent models and practical deployment.
+
+---
+
+## 🏆 Career Highlights
+
+🎥 **VoIP Android Video Phones for NEC**  
+[Watch Demo »](https://www.youtube.com/watch?v=3A7L3uexReE)
+
+📱 **Android Tablets for NTT**  
+[Watch Demo »](https://www.youtube.com/watch?v=4Y1-JsDp3IM)
+
+📡 **SDMB Multimedia Mobile Phones for SKTeletech**  
+[Watch Demo »](https://www.youtube.com/watch?v=J0NPZWObpac)
+
+---
+
+## 🌟 What I Bring to the Table
+- Strategic planning & execution across full-stack development  
+- Technical leadership with a focus on scalable architecture  
+- Cross-functional collaboration with global engineering teams  
+- Passion for solving complex problems with elegant solutions  
+
+---
+
+## 📫 Connect with Me
+
+🔗 [LinkedIn Profile](https://www.linkedin.com/in/junehong-dominicus/)
+
+---
+
+> “I’m enthusiastic about preventing potential problems and developing forward-thinking solutions.”  
+> — June Hong
