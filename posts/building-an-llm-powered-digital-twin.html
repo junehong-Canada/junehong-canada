@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building an LLM-Powered Digital Twin for Physical AI – June Hong</title>
+  <meta name="description" content="An LLM-powered Digital Twin that combines real-time IoT data, system-level rules, and a LangChain-based reasoning agent to explain what is happening, why it is happening, and what should be done next.">
+  <meta name="author" content="June Hong">
+  <link rel="icon" type="image/png" href="../assets/images/JHD.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5789326916093083"
+     crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">
+        <img src="../assets/images/JHD.png" alt="JH" class="monogram" />
+        <span>June Hong, Dominicus</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../blog.html">Blog</a>
+        <a href="https://github.com/junehong-dominicus" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/junehong-dominicus/" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Header -->
+  <header class="article-header">
+    <h1>Building an LLM-Powered Digital Twin for Physical AI</h1>
+    <div class="article-meta">
+      By June Hong • <time>2026-01-15</time>
+      <span> • 5 min read</span>
+    </div>
+    <div class="tags-container"><span class="tag">Digital Twin</span><span class="tag">Physical AI</span><span class="tag">LangChain</span><span class="tag">IoT</span><span class="tag">RAG</span></div>
+  </header>
+
+  <main>
+    <article>
+      <!-- Manual Ad Unit Container -->
+      <!-- Replace data-ad-slot value with your specific ID from AdSense -->
+      <div style="margin-bottom: 2rem; text-align: center; min-height: 100px;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-5789326916093083"
+             data-ad-slot="1816196154"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+      <h2>Introduction</h2>
+<p>Digital Twins are often misunderstood as dashboards that visualize sensor data.<br />
+In reality, a true Digital Twin is a <strong>living software entity</strong>—one that continuously mirrors a physical system, reasons about its behavior, and supports intelligent decision-making.</p>
+<p>In this project, I built an <strong>LLM-powered Digital Twin</strong> that combines real-time IoT data, system-level rules, and a LangChain-based reasoning agent.<br />
+The result is a system that not only monitors physical assets, but can also <strong>explain what is happening, why it is happening, and what should be done next</strong>.</p>
+<p>This post walks through the motivation, architecture, and design decisions behind the project, with a focus on how language models can act as a cognitive layer for Physical AI systems.</p>
+<hr />
+<h2>The Problem: Monitoring Is Not Understanding</h2>
+<p>Traditional industrial monitoring systems are very good at answering questions like:</p>
+<ul>
+<li>What is the current temperature?</li>
+<li>Is vibration above a threshold?</li>
+<li>Did a fault occur?</li>
+</ul>
+<p>However, they struggle to answer higher-level questions:</p>
+<ul>
+<li><em>Why</em> is the system behaving this way?</li>
+<li>Is this behavior dangerous or acceptable?</li>
+<li>What action should be taken right now?</li>
+</ul>
+<p>These questions matter in real-world physical systems, where operators need <strong>context, explanation, and confidence</strong>, not just raw numbers.</p>
+<p>My goal was to design a Digital Twin that goes beyond monitoring and instead focuses on <strong>understanding and reasoning</strong>.</p>
+<hr />
+<h2>What I Mean by a “Digital Twin”</h2>
+<p>In this project, a Digital Twin is defined as:</p>
+<blockquote>
+<p>A software entity that maintains a live internal representation of a physical system, continuously updated by sensor data, and capable of reasoning, prediction, and interaction.</p>
+</blockquote>
+<p>This definition has three important implications:</p>
+<ol>
+<li>The twin has <strong>state</strong>, not just data</li>
+<li>The twin applies <strong>models and rules</strong>, not just visualization</li>
+<li>The twin can <strong>communicate and explain</strong> its decisions</li>
+</ol>
+<hr />
+<h2>System Architecture Overview</h2>
+<p>The system is designed as four loosely coupled layers:</p>
+<h3>Architecture Breakdown</h3>
+<p><strong>Physical Layer</strong>
+- IoT MCUs-based device
+- Temperature, vibration, and RPM sensors
+- Publishes telemetry via MQTT</p>
+<p><strong>Data Ingestion Layer</strong>
+- MQTT broker for real-time streaming
+- Backend service that consumes sensor data</p>
+<p><strong>Digital Twin Core</strong>
+- Maintains the twin’s internal state
+- Applies rule-based health evaluation
+- Detects abnormal behavior
+- Stores historical context</p>
+<p><strong>Intelligence &amp; Interaction</strong>
+- Time-series database for trends and analysis
+- Vector database for documentation and logs
+- LangChain-powered agent for reasoning and explanation
+- Dashboards and natural-language interface</p>
+<p>This separation allows each layer to evolve independently while keeping the system scalable and interpretable.</p>
+<hr />
+<h2>The Digital Twin Core: A Living Model</h2>
+<p>The most important design decision in this project was treating the Digital Twin as a <strong>software object</strong>, not a database row.</p>
+<p>Each physical asset has a corresponding twin instance that maintains:</p>
+<ul>
+<li>Current sensor values</li>
+<li>Derived health metrics</li>
+<li>Status flags</li>
+<li>Evaluation logic</li>
+</ul>
+<p>Every incoming sensor update modifies the twin’s internal state, which then triggers health evaluation and anomaly checks.</p>
+<p>This approach mirrors how engineers reason about physical systems: as evolving entities with behavior, not static measurements.</p>
+<hr />
+<h2>Health Evaluation and Rules</h2>
+<p>Before adding machine learning or language models, the system uses <strong>explicit rules</strong> derived from domain knowledge.</p>
+<p>Examples include:
+- Temperature thresholds indicating overheating
+- Vibration levels associated with mechanical wear
+- RPM deviations suggesting load issues</p>
+<p>Rule-based logic is fast, deterministic, and interpretable.<br />
+It provides a strong foundation that higher-level intelligence can build upon.</p>
+<hr />
+<h2>Why Add a Language Model?</h2>
+<p>While rules and metrics can detect problems, they cannot <strong>explain</strong> them well.</p>
+<p>This is where language models become valuable—not as replacements for physics or control logic, but as <strong>reasoning and communication layers</strong>.</p>
+<p>In this project, the LLM is not fed raw sensor streams.<br />
+Instead, it receives:</p>
+<ul>
+<li>The current Digital Twin state</li>
+<li>Historical trends</li>
+<li>Maintenance documentation and logs (via retrieval)</li>
+</ul>
+<p>This allows the model to reason in context and produce explanations that align with how humans think and communicate.</p>
+<hr />
+<h2>LangChain as the Cognitive Layer</h2>
+<p>LangChain is used to orchestrate the reasoning process:</p>
+<ul>
+<li>Structured twin state is passed as context</li>
+<li>Relevant documents are retrieved from a vector database</li>
+<li>The agent produces explanations and recommendations</li>
+</ul>
+<p>This enables interactions such as:</p>
+<ul>
+<li>“Why is the motor overheating?”</li>
+<li>“Is it safe to operate today?”</li>
+<li>“What maintenance should be scheduled?”</li>
+</ul>
+<p>The Digital Twin effectively becomes <strong>queryable in natural language</strong>, without sacrificing system-level rigor.</p>
+<hr />
+<h2>Why This Matters for Physical AI</h2>
+<p>Physical AI systems operate in environments where errors are costly and ambiguity is dangerous.</p>
+<p>This project demonstrates how LLMs can:
+- Improve interpretability
+- Assist human decision-making
+- Bridge the gap between raw data and actionable insight</p>
+<p>Rather than replacing traditional models, language models <strong>augment</strong> them by making complex system behavior understandable and accessible.</p>
+<hr />
+<h2>Lessons Learned</h2>
+<p>Some key takeaways from building this system:</p>
+<ul>
+<li>Digital Twins should model <strong>state and behavior</strong>, not just data</li>
+<li>Rules and physics provide essential grounding</li>
+<li>LLMs are most effective when used as reasoning layers, not prediction engines</li>
+<li>Architecture clarity matters more than model complexity</li>
+</ul>
+<hr />
+<h2>Future Work</h2>
+<p>There are several directions this project can evolve:</p>
+<ul>
+<li>Predictive maintenance using machine learning</li>
+<li>Remaining Useful Life (RUL) estimation</li>
+<li>Multi-agent Digital Twins</li>
+<li>Closed-loop autonomous control</li>
+<li>3D visualization of the twin state</li>
+</ul>
+<hr />
+<h2>Conclusion</h2>
+<p>This project explores how Digital Twins and language models can work together to create intelligent, interpretable Physical AI systems.</p>
+<p>By treating the Digital Twin as a living software entity and using LLMs as a cognitive layer, it becomes possible to move from monitoring to understanding—and from understanding to action.</p>
+<p>The full source code and system design are available on <a href="https://github.com/junehong-dominicus/digital-twin-physical-ai">GitHub</a>.</p>
+<hr />
+<p><em>If you’re interested in Physical AI, Digital Twins, or LLM-powered systems, feel free to reach out or explore the project repository.</em></p>
+      {{ content }}
+    </article>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="../index.html">Home</a> |
+      <a href="../projects.html">Projects</a> |
+      <a href="../blog.html">Blog</a> |
+      <a href="../marketing.html">Marketing</a> |
+      <a href="../privacy-policy.html">Privacy Policy</a>
+    </div>
+    <p>© 2026 June Hong — Built with plain HTML & CSS</p>
+  </footer>
+
+</body>
+</html>

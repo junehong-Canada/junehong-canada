@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Industrial Edge AI Gateway: Real-time Anomaly Detection on ESP32 – June Hong</title>
+  <meta name="description" content="A technical deep dive into architecting a high-performance Edge AI inference engine on ESP32 for industrial safety systems, featuring TFLite Micro, GRU models, and industrial-grade protocol integration.">
+  <meta name="author" content="June Hong">
+  <link rel="icon" type="image/png" href="../assets/images/JHD.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">
+        <img src="../assets/images/JHD.png" alt="JH" class="monogram" />
+        <span>June Hong, Dominicus</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../blog.html">Blog</a>
+        <a href="https://github.com/junehong-dominicus" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/junehong-dominicus/" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Header -->
+  <header class="article-header">
+    <h1>Industrial Edge AI Gateway: Real-time Anomaly Detection on ESP32</h1>
+    <div class="article-meta">
+      By June Hong • <time>2026-05-01</time>
+    </div>
+  </header>
+
+  <main>
+    <article>
+      <h2>Project Overview</h2>
+      <p>The <strong>Industrial Edge AI Gateway</strong> is a high-performance cyber-physical system designed to bring predictive maintenance and safety diagnostics to the extreme edge. By integrating Gated Recurrent Unit (GRU) models directly onto the ESP32-WROVER-E microcontroller, the system can detect anomalies in industrial sensors (smoke, CO, temperature, voltage) with sub-100ms latency, independent of cloud connectivity.</p>
+
+      <img src="../assets/images/Industrial_Edge_AI_Gateway.png" alt="Industrial Edge AI Gateway Concept" />
+
+      <h2>Key Challenges & Solutions</h2>
+      
+      <h3>1. Real-time Constraint Isolation</h3>
+      <p>In industrial safety, missing a protocol poll (Modbus/BACnet) is not an option. I architected a dual-core task isolation strategy using <strong>FreeRTOS</strong>:</p>
+      <ul>
+        <li><strong>Core 0 (Priority 24):</strong> Dedicated to high-speed protocol polling and industrial-grade telemetry reporting and control.</li>
+        <li><strong>Core 1 (Priority 5):</strong> Isolated for TFLite Micro inference, ensuring that heavy computation never starves critical communication tasks.</li>
+      </ul>
+
+      <h3>2. Memory Optimization in PSRAM</h3>
+      <p>Running deep learning models on a 4MB PSRAM module requires surgical memory management. I implemented a custom allocation strategy for the <strong>TFLite Tensor Arena</strong> and model weights, utilizing <code>MALLOC_CAP_SPIRAM</code> to keep the internal SRAM free for fast stack operations.</p>
+
+      <h3>3. The EHIF (Extensible Hardware Interface) Protocol</h3>
+      <p>To enable seamless OTA model updates and telemetry reporting, I extended the EHIF protocol with a new command set (<code>0x50-0x5F</code>). This allows the gateway to receive quantized model chunks and reload the inference engine without a full system reboot.</p>
+
+      <hr />
+
+      <h2>Technical Specifications</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Specification</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Microcontroller</strong></td>
+            <td>ESP32-WROVER-E (Dual-core, 240MHz)</td>
+          </tr>
+          <tr>
+            <td><strong>AI Framework</strong></td>
+            <td>TensorFlow Lite Micro (TFLM)</td>
+          </tr>
+          <tr>
+            <td><strong>Model Architecture</strong></td>
+            <td>GRU (Gated Recurrent Unit) for Time-series Anomaly Detection</td>
+          </tr>
+          <tr>
+            <td><strong>Inference Latency</strong></td>
+            <td>~85ms per window (10 steps)</td>
+          </tr>
+          <tr>
+            <td><strong>Memory Footprint</strong></td>
+            <td>256KB Arena in PSRAM / 1.2MB Model in Flash</td>
+          </tr>
+          <tr>
+            <td><strong>Protocols</strong></td>
+            <td>Modbus RTU/TCP, BACnet/IP, CIP, and Industrial IoT protocols</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr />
+
+      <h2>The AI Feature Vector</h2>
+      <p>The system monitors 6 core features at 1Hz to build a stateful representation of the industrial environment:</p>
+      <ol>
+        <li><strong>Battery Voltage</strong>: Monitoring supply health.</li>
+        <li><strong>Loop Current</strong>: Detecting sensor wiring faults.</li>
+        <li><strong>Temperature</strong>: Thermal stress analysis.</li>
+        <li><strong>Smoke Obscuration</strong>: Fire signature detection.</li>
+        <li><strong>CO Concentration</strong>: Toxicity monitoring.</li>
+        <li><strong>System Status</strong>: Bitmask of hardware flags.</li>
+      </ol>
+
+      <hr />
+
+      <h2>Future Work: LLM Integration</h2>
+      <p>The next phase of this project involves using the Edge AI anomalies as <strong>Cognitive Triggers</strong> for a cloud-resident Digital Twin agent. When the ESP32 detects an anomaly, it will trigger a LangGraph-based RAG workflow to provide the human operator with grounded diagnostic recommendations based on the equipment's technical manuals.</p>
+
+      <p>
+        <a href="../projects.html">&larr; Back to Projects</a>
+      </p>
+    </article>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="../index.html">Home</a> | 
+      <a href="../projects.html">Projects</a> | 
+      <a href="../blog.html">Blog</a> | 
+      <a href="../marketing.html">Marketing</a> |
+      <a href="../privacy-policy.html">Privacy Policy</a>
+    </div>
+    <p>© 2026 June Hong — Built with plain HTML & CSS</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Understanding RAG: The Bridge Between LLMs and Your Data – June Hong</title>
+  <link rel="icon" type="image/png" href="../assets/images/JHD.png">
+  <meta name="description" content="Retrieval-Augmented Generation (RAG) is an architecture used to optimize the output of an LLM by referencing a trusted knowledge base outside of its training data.">
+  <meta name="author" content="June Hong">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5789326916093083"
+     crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">
+        <img src="../assets/images/JHD.png" alt="JH" class="monogram" />
+        <span>June Hong, Dominicus</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../blog.html">Blog</a>
+        <a href="https://github.com/junehong-dominicus" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/junehong-dominicus/" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Header -->
+  <header class="article-header">
+    <h1>Understanding RAG: The Bridge Between LLMs and Your Data</h1>
+    <div class="article-meta">
+      By June Hong • <time>2026-01-11</time>
+    </div>
+  </header>
+
+  <main>
+    <article>
+      <!-- Manual Ad Unit Container -->
+      <!-- Replace data-ad-slot value with your specific ID from AdSense -->
+      <div style="margin-bottom: 2rem; text-align: center; min-height: 100px;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-5789326916093083"
+             data-ad-slot="1816196154"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+      <h1>Understanding RAG: The Bridge Between LLMs and Your Data</h1>
+<p>Large Language Models (LLMs) like GPT-4 or Gemini are incredibly powerful, but they have two major limitations: they have a <strong>knowledge cutoff</strong> (they don't know what happened yesterday), and they don't have access to <strong>your private data</strong> (your company’s docs, your personal notes, etc.).</p>
+<p>This is where <strong>Retrieval-Augmented Generation (RAG)</strong> comes in.</p>
+<hr />
+<div class="diagram-frame">
+  <img src="../assets/images/2026-01-11-RAG Flow Diagram_small.png" alt="RAG data flow: ingestion and indexing into a vector database, then real-time retrieval and augmented generation"/>
+  <p class="diagram-caption">Fig. 1 — RAG ingestion, retrieval, and generation flow</p>
+</div>
+<h2>What is RAG?</h2>
+<p><strong>Retrieval-Augmented Generation (RAG)</strong> is an architecture used to optimize the output of an LLM by referencing a trusted knowledge base outside of its training data before generating a response.</p>
+<p>Think of it this way:</p>
+<ul>
+<li><strong>Standard LLM:</strong> Answering a history exam based purely on memory.</li>
+<li><strong>RAG-enabled LLM:</strong> Answering a history exam with an open textbook tailored specifically to the subject.</li>
+</ul>
+<hr />
+<h2>How RAG Works: A Step-by-Step Breakdown</h2>
+<p>The RAG process can be broken down into two main phases: the <strong>Data Preparation</strong> phase and the <strong>Inference (Retrieval &amp; Generation)</strong> phase.</p>
+<h3>1. Data Preparation (The Indexing Phase)</h3>
+<p>Before you can ask questions, you have to make your data "readable" for the AI.</p>
+<ul>
+<li><strong>Loading:</strong> Importing documents (PDFs, HTML, Markdown).</li>
+<li><strong>Chunking:</strong> Breaking long documents into smaller, manageable pieces.</li>
+<li><strong>Embedding:</strong> Converting these text chunks into numerical vectors using an embedding model.</li>
+<li><strong>Vector Store:</strong> Storing these vectors in a specialized database (like Pinecone, Milvus, or Weaviate).</li>
+</ul>
+<h3>2. The Retrieval &amp; Generation Loop</h3>
+<p>When a user asks a question, the following happens in milliseconds:</p>
+<ol>
+<li><strong>Query Transformation:</strong> The user's question is converted into a vector.</li>
+<li><strong>Retrieval:</strong> The system searches the Vector Store for the "chunks" of text that are mathematically most similar to the question.</li>
+<li><strong>Augmentation:</strong> The system combines the original user question with the retrieved chunks into a single prompt.</li>
+<li><strong>Generation:</strong> The LLM reads the provided context and answers the question accurately.</li>
+</ol>
+<hr />
+<h2>Why Use RAG Instead of Fine-Tuning?</h2>
+<p>A common question is: <em>"Why not just fine-tune the model on my data?"</em> While fine-tuning is great for teaching a model a specific <em>style</em> or <em>vocabulary</em>, RAG is usually superior for <em>facts</em>.</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>RAG</th>
+<th>Fine-Tuning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Knowledge Update</strong></td>
+<td>Instant (just add a new doc)</td>
+<td>Slow (requires retraining)</td>
+</tr>
+<tr>
+<td><strong>Transparency</strong></td>
+<td>High (can cite sources)</td>
+<td>Low (black box)</td>
+</tr>
+<tr>
+<td><strong>Cost</strong></td>
+<td>Low</td>
+<td>High (GPU intensive)</td>
+</tr>
+<tr>
+<td><strong>Hallucination</strong></td>
+<td>Significantly Reduced</td>
+<td>Still Possible</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>The Benefits of RAG</h2>
+<ul>
+<li><strong>Accuracy:</strong> It grounds the model in factual, up-to-date information.</li>
+<li><strong>Source Attribution:</strong> RAG systems can provide citations, allowing users to verify where the information came from.</li>
+<li><strong>Data Privacy:</strong> You don't need to send your entire dataset to a model provider for training; you only send the relevant snippets during the prompt.</li>
+</ul>
+<hr />
+<h2>Conclusion</h2>
+<p>RAG is the gold standard for building AI applications that need to be reliable, factual, and specialized. By bridging the gap between a model's reasoning capabilities and your specific data, you turn a general-purpose AI into a powerful, domain-specific expert.</p>
+    </article>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="../index.html">Home</a> |
+      <a href="../projects.html">Projects</a> |
+      <a href="../blog.html">Blog</a> |
+      <a href="../marketing.html">Marketing</a> |
+      <a href="../privacy-policy.html">Privacy Policy</a>
+    </div>
+    <p>© 2026 June Hong — Built with plain HTML & CSS</p>
+  </footer>
+
+</body>
+</html>

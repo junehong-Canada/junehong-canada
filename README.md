@@ -1,70 +1,58 @@
-# 👋 Hello, I'm June Hong
+# junehong.github.io
 
-🚀 **Software Architect | Technical Leader | Innovator**
+Personal portfolio and blog website for June Hong.
 
-With over **10 years of software development** and **12 years of management experience**, I've led high-impact teams across global tech giants like **Samsung**, **NTT**, and **NEC**. My work spans **cloud platforms**, **smart mobile devices**, and **embedded systems**, delivering solutions that power millions of users.
+## Project Structure
 
----
+```text
+├── index.html              # Main landing page
+├── projects.html           # Projects portfolio
+├── blog.html               # Blog index page
+├── style.css               # Shared styles
+├── templates/
+│   └── post.html           # HTML template for blog posts
+├── posts/                  # Markdown source files for blog posts
+│   ├── *.md
+│   └── *.html              # Generated HTML files
+└── scripts/                # Build scripts
+    ├── build_post.py       # Converts MD to HTML (all or single)
+    ├── update_blog_index.py# Updates blog.html with latest posts
+    └── run_build.bat/.sh   # One-click build scripts
+```
 
-## 🧠 Expertise Snapshot
+## How to Add a New Blog Post
 
-### 💻 Platforms & Frameworks
-- **Spring Boot**, **Django REST**, **MongoDB**, **PostgreSQL**, **Redis**, **MySQL**
-- **Amazon Web Services (AWS)**, **Docker**, **Linux Server**
-- Embedded OS: **REX OS**, **VxWorks**, **Nucleus**, **Embedded Linux**
+1.  Create a new Markdown file in the `posts/` directory (e.g., `posts/my-new-post.md`).
+2.  Add the required Front Matter at the top of the file:
 
-### 🧑‍💻 Programming Languages
-- **Python**, **Java**, **C/C++**, **Kotlin (Android)**, **Swift**, **ARM Assembler**
-- Web: **HTML**, **CSS**, **JavaScript**, **PHP**
+    ```markdown
+    ---
+    title: "My New Post Title"
+    description: "A short summary of the post for the card view."
+    date: "2026-01-15"
+    author: "June Hong"
+    ---
 
-### 🌐 Networking Protocols
-- **TCP/IP**, **HTTP/HTTPS**, **RTP/RTCP**, **SIP**
-- Wireless: **Wi-Fi**, **TV White Space**
+    # Content starts here...
+    ```
 
----
+3.  Run the build script to generate the HTML and update the index.
 
-## 🤖 Machine Learning & AI
+## How to Build
 
-I apply machine learning to solve real-world problems with precision and scalability. My experience spans:
+### Windows
+Run the batch file:
+```cmd
+scripts\run_build.bat
+```
 
-- **Frameworks & Libraries**: TensorFlow 2.0, Keras, scikit-learn, OpenCV  
-- **Techniques**: Supervised & Unsupervised Learning, CNNs, RNNs, Transfer Learning  
-- **Applications**:
-  - Image classification & object detection  
-  - Natural Language Processing (NLP)  
-  - Predictive analytics & recommendation systems  
-  - Time-series forecasting  
+### Linux / macOS
+Run the shell script:
+```bash
+./scripts/run_build.sh
+```
 
-I am building ML-powered features into mobile apps, cloud platforms, and embedded systems—bridging the gap between intelligent models and practical deployment.
-
----
-
-## 🏆 Career Highlights
-
-🎥 **VoIP Android Video Phones for NEC**  
-[Watch Demo »](https://www.youtube.com/watch?v=3A7L3uexReE)
-
-📱 **Android Tablets for NTT**  
-[Watch Demo »](https://www.youtube.com/watch?v=4Y1-JsDp3IM)
-
-📡 **SDMB Multimedia Mobile Phones for SKTeletech**  
-[Watch Demo »](https://www.youtube.com/watch?v=J0NPZWObpac)
-
----
-
-## 🌟 What I Bring to the Table
-- Strategic planning & execution across full-stack development  
-- Technical leadership with a focus on scalable architecture  
-- Cross-functional collaboration with global engineering teams  
-- Passion for solving complex problems with elegant solutions  
-
----
-
-## 📫 Connect with Me
-
-🔗 [LinkedIn Profile](https://www.linkedin.com/in/junehong-dominicus/)
-
----
-
-> “I’m enthusiastic about preventing potential problems and developing forward-thinking solutions.”  
-> — June Hong
+This will:
+1.  Install Python dependencies (`markdown`, `pyyaml`).
+2.  Convert all `.md` files in `posts/` to `.html` using the `templates/post.html` template.
+3.  Update `blog.html` with the list of posts, sorted by date.

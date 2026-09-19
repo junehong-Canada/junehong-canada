@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LangChain: The Missing Glue for Real-World AI Applications – June Hong</title>
+  <link rel="icon" type="image/png" href="../assets/images/JHD.png">
+  <meta name="description" content="LangChain is the orchestration layer that turns LLMs into actual systems. Learn how it handles memory, tools, and agents to build real-world AI applications.">
+  <meta name="author" content="June Hong">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5789326916093083"
+     crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">
+        <img src="../assets/images/JHD.png" alt="JH" class="monogram" />
+        <span>June Hong, Dominicus</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../blog.html">Blog</a>
+        <a href="https://github.com/junehong-dominicus" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/junehong-dominicus/" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Header -->
+  <header class="article-header">
+    <h1>LangChain: The Missing Glue for Real-World AI Applications</h1>
+    <div class="article-meta">
+      By June Hong • <time>2026-01-14</time>
+    </div>
+  </header>
+
+  <main>
+    <article>
+      <!-- Manual Ad Unit Container -->
+      <!-- Replace data-ad-slot value with your specific ID from AdSense -->
+      <div style="margin-bottom: 2rem; text-align: center; min-height: 100px;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-5789326916093083"
+             data-ad-slot="1816196154"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+      <h1><strong>LangChain: The Missing Glue for Real-World AI Applications</strong></h1>
+<p>If you’ve played with large language models (LLMs) long enough, you’ve probably hit this wall:</p>
+<p>“The model is smart… but it doesn’t <em>do</em> anything.”</p>
+<p>It answers questions. It writes text.<br />
+But the moment you want it to <strong>use tools</strong>, <strong>remember context</strong>, <strong>talk to APIs</strong>, or <strong>reason over your own data</strong>, things get messy fast.</p>
+<p>That’s where <strong>LangChain</strong> comes in.</p>
+<p>LangChain isn’t a model. It’s the <strong>orchestration layer</strong> that turns LLMs into actual systems.</p>
+<hr />
+<h2><strong>What Is LangChain (Really)?</strong></h2>
+<p>LangChain is a framework for building applications powered by language models by <strong>chaining together</strong>:</p>
+<ul>
+<li>Prompts  </li>
+<li>Models (OpenAI, local LLMs, etc.)  </li>
+<li>Memory  </li>
+<li>Tools (APIs, functions, databases)  </li>
+<li>Retrieval systems (RAG)  </li>
+<li>Agents (decision-making LLMs)</li>
+</ul>
+<p>Think of it as <strong>middleware for intelligence</strong>.</p>
+<p>If an LLM is a brain, LangChain is the nervous system.</p>
+<hr />
+<h2><strong>The Core Problem LangChain Solves</strong></h2>
+<p>LLMs are:</p>
+<ul>
+<li>Stateless  </li>
+<li>Isolated  </li>
+<li>Passive</li>
+</ul>
+<p>Real applications need:</p>
+<ul>
+<li>Memory  </li>
+<li>Context  </li>
+<li>Action  </li>
+<li>External knowledge  </li>
+<li>Decision logic</li>
+</ul>
+<p>LangChain handles the boring but critical plumbing so you can focus on <em>what the AI should do</em>, not how to duct-tape prompts together.</p>
+<hr />
+<h2><strong>Key LangChain Concepts (Without the Fluff)</strong></h2>
+<h3><strong>1. Chains</strong></h3>
+<p>A <strong>Chain</strong> is a sequence of steps:</p>
+<p>Input → Prompt → LLM → Output</p>
+<p>But it can get more powerful:</p>
+<p>User input<br />
+→ Context retrieval<br />
+→ Prompt formatting<br />
+→ LLM reasoning<br />
+→ Tool call<br />
+→ Final response</p>
+<p>This is how you build predictable, repeatable behavior.</p>
+<hr />
+<h3><strong>2. Prompt Templates</strong></h3>
+<p>Instead of hard-coding prompts, LangChain lets you parameterize them.</p>
+<p>Why this matters:</p>
+<ul>
+<li>Easier iteration  </li>
+<li>Less prompt spaghetti  </li>
+<li>More consistent outputs</li>
+</ul>
+<p>You stop <em>winging it</em> and start engineering prompts.</p>
+<hr />
+<h3><strong>3. Memory</strong></h3>
+<p>LLMs forget everything between calls. LangChain doesn’t.</p>
+<p>Memory lets your app:</p>
+<ul>
+<li>Remember conversations  </li>
+<li>Track state  </li>
+<li>Maintain long-term context</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>Chat history memory  </li>
+<li>Summary memory  </li>
+<li>Custom memory objects (for agents, simulations, digital twins 👀)</li>
+</ul>
+<hr />
+<h3><strong>4. Tools &amp; Function Calling</strong></h3>
+<p>This is where things get spicy.</p>
+<p>LangChain lets an LLM:</p>
+<ul>
+<li>Call APIs  </li>
+<li>Query databases  </li>
+<li>Control devices  </li>
+<li>Run code  </li>
+<li>Interact with IoT systems</li>
+</ul>
+<p>Instead of:</p>
+<p>“Here’s an answer”</p>
+<p>You get:</p>
+<p>“I checked the data, ran an action, and here’s the result”</p>
+<p>This is how LLMs stop being chatbots and start being <strong>operators</strong>.</p>
+<hr />
+<h3><strong>5. Agents</strong></h3>
+<p>Agents are LLMs that can <strong>decide what to do next</strong>.</p>
+<p>They:</p>
+<ul>
+<li>Observe the situation  </li>
+<li>Choose a tool  </li>
+<li>Execute it  </li>
+<li>Reflect  </li>
+<li>Repeat</li>
+</ul>
+<p>This enables:</p>
+<ul>
+<li>Autonomous workflows  </li>
+<li>Multi-step reasoning  </li>
+<li>Self-directed problem solving</li>
+</ul>
+<p>Yes, this is where things start to feel like early AGI (with guardrails).</p>
+<hr />
+<h3><strong>6. Retrieval-Augmented Generation (RAG)</strong></h3>
+<p>LLMs don’t know <em>your</em> data.</p>
+<p>RAG fixes that by:</p>
+<ol>
+<li>Storing your documents as embeddings  </li>
+<li>Retrieving relevant chunks  </li>
+<li>Injecting them into the prompt  </li>
+<li>Letting the model answer <strong>grounded in facts</strong></li>
+</ol>
+<p>LangChain provides:</p>
+<ul>
+<li>Vector store integrations  </li>
+<li>Retrievers  </li>
+<li>Document loaders  </li>
+<li>Chunking strategies</li>
+</ul>
+<p>This is how you build:</p>
+<ul>
+<li>AI knowledge bases  </li>
+<li>Internal search assistants  </li>
+<li>Technical copilots</li>
+</ul>
+<hr />
+<h2><strong>Why LangChain Matters in 2026</strong></h2>
+<p>The future of AI isn’t just better models.</p>
+<p>It’s:</p>
+<ul>
+<li><strong>Systems</strong>  </li>
+<li><strong>Agents</strong>  </li>
+<li><strong>Physical AI</strong>  </li>
+<li><strong>Digital twins</strong>  </li>
+<li><strong>Autonomous tools</strong></li>
+</ul>
+<p>LangChain sits right at that intersection.</p>
+<p>If you’re working on:</p>
+<ul>
+<li>RAG systems  </li>
+<li>AI agents  </li>
+<li>Robotics + LLMs  </li>
+<li>IoT + AI  </li>
+<li>Simulation environments</li>
+</ul>
+<p>LangChain isn’t optional — it’s infrastructure.</p>
+<hr />
+<h2><strong>A Simple Mental Model</strong></h2>
+<p>Here’s how I think about it:</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LLM</td>
+<td>Reasoning engine</td>
+</tr>
+<tr>
+<td>LangChain</td>
+<td>Control system</td>
+</tr>
+<tr>
+<td>Tools</td>
+<td>Hands &amp; sensors</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>State</td>
+</tr>
+<tr>
+<td>Data</td>
+<td>Ground truth</td>
+</tr>
+</tbody>
+</table>
+<p>Once you see it this way, designing AI apps becomes way more intentional.</p>
+<hr />
+<h2><strong>When <em>Not</em> to Use LangChain</strong></h2>
+<p>Hot take 🔥:<br />
+LangChain is <strong>overkill</strong> if:</p>
+<ul>
+<li>You just need a single prompt → response  </li>
+<li>You’re building a static demo  </li>
+<li>You don’t need tools, memory, or retrieval</li>
+</ul>
+<p>But the moment your app grows past “toy,” LangChain pays for itself fast.</p>
+<hr />
+<h2><strong>What I’m Building With It</strong></h2>
+<p>Personally, I’m using LangChain for:</p>
+<ul>
+<li>RAG-based knowledge systems  </li>
+<li>AI agents connected to real sensors  </li>
+<li>Digital twins for physical systems  </li>
+<li>Long-running autonomous workflows</li>
+</ul>
+<p>This is where AI stops being theoretical and starts touching reality.</p>
+<hr />
+<h2><strong>Final Thoughts</strong></h2>
+<p>LangChain isn’t magic.</p>
+<p>It’s <strong>structure</strong>.</p>
+<p>And in AI, structure is what turns raw intelligence into something useful, reliable, and scalable.</p>
+<p>If you want to build <em>real</em> AI systems — not just clever prompts — LangChain is one of the best places to start.</p>
+<hr />
+    </article>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="../index.html">Home</a> |
+      <a href="../projects.html">Projects</a> |
+      <a href="../blog.html">Blog</a> |
+      <a href="../marketing.html">Marketing</a> |
+      <a href="../privacy-policy.html">Privacy Policy</a>
+    </div>
+    <p>© 2026 June Hong — Built with plain HTML & CSS</p>
+  </footer>
+
+</body>
+</html>
