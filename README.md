@@ -56,3 +56,11 @@ This will:
 1.  Install Python dependencies (`markdown`, `pyyaml`).
 2.  Convert all `.md` files in `posts/` to `.html` using the `templates/post.html` template.
 3.  Update `blog.html` with the list of posts, sorted by date.
+
+## Homepage Hosting
+
+The homepage is deployed to GitHub Pages by
+`.github/workflows/deploy-pages.yml` whenever changes are pushed to `main`.
+To enable the first deployment, open the repository's **Settings > Pages** and
+set **Source** to **GitHub Actions**. The workflow can also be started manually
+from the **Actions** tab.
