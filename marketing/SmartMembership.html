@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartMembership – June Hong</title>
+  <link rel="icon" type="image/png" href="../assets/images/JHD.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5789326916093083"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">
+        <img src="../assets/images/JHD.png" alt="JH" class="monogram" />
+        <span>June Hong, Dominicus</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../blog.html">Blog</a>
+        <a href="../supports.html">Support</a>
+        <a href="../marketing.html">Marketing</a>
+        <a href="https://github.com/junehong-dominicus" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/junehong-dominicus/" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="article-container">
+    <article>
+      <div class="article-header">
+        <h1>SmartMembership</h1>
+      </div>
+      
+      <p><strong>Digital Loyalty Card Wallet</strong></p>
+      <p>SmartMembership is a lightweight and efficient iOS application designed to digitize your physical membership and loyalty cards. Keep your wallet slim and your cards organized in one secure place.</p>
+
+      <h2>Key Features</h2>
+      <ul>
+        <li><strong>Universal Scanner</strong>: Instantly scan physical cards using your device's camera.
+          <ul>
+            <li>Supports <strong>QR Codes</strong>, <strong>EAN-13</strong>, <strong>UPC-A</strong>, and <strong>Code 128</strong>.</li>
+            <li>Includes specific logic to correctly identify UPC-A barcodes that iOS detects as EAN-13 (by handling leading zeros).</li>
+          </ul>
+        </li>
+        <li><strong>High-Quality Rendering</strong>: Generates crisp, scannable barcodes on-screen.
+          <ul>
+            <li><strong>Smart Fallback</strong>: Includes logic to ensure your barcode is always readable. If a specific format generation (e.g., EAN-13) fails due to checksum errors, the app falls back to generating a Code 128 barcode.</li>
+          </ul>
+        </li>
+        <li><strong>Digital Card Wallet</strong>: View your cards with a generated visual layout displaying your name, membership number, and barcode.</li>
+        <li><strong>Privacy Focused</strong>: All processing happens locally on your device using native iOS frameworks.</li>
+      </ul>
+
+      <h2>Technical Overview</h2>
+      <p>This project is built using native iOS frameworks to ensure performance and privacy:</p>
+      <ul>
+        <li><strong>Scanning</strong>: Implemented via <code>BarcodeScannerViewController</code> using <code>AVFoundation</code> for real-time capture.</li>
+        <li><strong>Rendering</strong>: Uses <code>BarcodeRenderer</code> with <code>CoreImage</code> to generate barcode images from string data.</li>
+        <li><strong>Card Visualization</strong>: Uses <code>generateCardImage</code> to create composite images of the membership card containing the user's name, card number, and the generated barcode.</li>
+      </ul>
+
+      <h2>Usage</h2>
+      <ol>
+        <li>Tap scan to capture a barcode from a physical card.</li>
+        <li>The app automatically detects the barcode type (including correcting UPC-A codes scanned as EAN-13).</li>
+        <li>Save the card and present your screen at the store checkout.</li>
+      </ol>
+
+      <h2>Download</h2>
+      <p><a href="https://apps.apple.com/ca/app/smartmembership777/id6758261270" target="_blank">Download SmartMembership on the App Store</a></p>
+
+      <h2>Contact</h2>
+      <p>For inquiries, email: <a href="mailto:junehong.dominicus@gmail.com">junehong.dominicus@gmail.com</a></p>
+
+      <hr>
+      <p><em>Version 1.0.0</em></p>
+    </article>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="../index.html">Home</a> | 
+      <a href="../projects.html">Projects</a> | 
+      <a href="../blog.html">Blog</a> | 
+      <a href="../supports.html">Support</a> |
+      <a href="../marketing.html">Marketing</a> |
+      <a href="../privacy-policy.html">Privacy Policy</a>
+    </div>
+    <p>© 2026 June Hong — Built with plain HTML & CSS</p>
+  </footer>
+</body>
+</html>

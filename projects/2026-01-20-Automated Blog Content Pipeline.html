@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building an Autonomous Blog Pipeline with LangGraph and RAG – June Hong</title>
+  <meta name="description" content="A deep dive into building an end-to-end automated content generation pipeline that researches, writes, and publishes high-quality technical blog posts using LangChain, RAG, and LangGraph.">
+  <meta name="author" content="June Hong">
+  <link rel="icon" type="image/png" href="../assets/images/JHD.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5789326916093083"
+     crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">
+        <img src="../assets/images/JHD.png" alt="JH" class="monogram" />
+        <span>June Hong, Dominicus</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../blog.html">Blog</a>
+        <a href="https://github.com/junehong-dominicus" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/junehong-dominicus/" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Header -->
+  <header class="article-header">
+    <h1>Building an Autonomous Blog Pipeline with LangGraph and RAG</h1>
+    <div class="article-meta">
+      By June Hong • <time>2026-01-20</time>
+    </div>
+  </header>
+
+  <main>
+    <article>
+      <!-- Manual Ad Unit Container -->
+      <!-- Replace data-ad-slot value with your specific ID from AdSense -->
+      <div style="margin-bottom: 2rem; text-align: center; min-height: 100px;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-5789326916093083"
+             data-ad-slot="1816196154"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+      <h2>Introduction</h2>
+<p>Creating high-quality technical content consistently is a challenge. Between researching complex topics, structuring the narrative, writing the draft, and optimizing for SEO, a single blog post can take hours or even days to complete.</p>
+<p>To solve this, I built the <strong>Automated Blog Content Pipeline</strong>—an intelligent system designed to research, generate, review, and publish blog posts with minimal human intervention. Unlike simple text generation scripts, this project leverages <strong>LangGraph</strong> for stateful orchestration and <strong>RAG (Retrieval-Augmented Generation)</strong> to ensure factual accuracy.</p>
+<p>In this post, I'll break down the architecture and key components of this autonomous publishing system.</p>
+<hr />
+<h2>The Architecture: Orchestrating Agents</h2>
+<p>The core of the system is built on <strong>LangGraph</strong>, which allows us to define a Directed Acyclic Graph (DAG) of operations. Instead of a linear chain, the pipeline manages state and allows for conditional logic, retries, and loops.</p>
+<p>Here is the high-level flow:</p>
+<ol>
+<li><strong>Topic Input</strong>: The user provides a topic or the system picks one from a queue.</li>
+<li><strong>Research (RAG)</strong>: An agent queries a local vector store (FAISS/Chroma) to gather factual context.</li>
+<li><strong>Outline Generation</strong>: Structuring the post with logical flow and estimated word counts.</li>
+<li><strong>Content Writing</strong>: Generating the draft based <em>only</em> on the research context to prevent hallucinations.</li>
+<li><strong>Critic / QA</strong>: A separate agent reviews the draft for accuracy, flow, and tone. If it fails, it sends it back for rewriting.</li>
+<li><strong>SEO &amp; Formatting</strong>: Optimizing titles, meta descriptions, and Markdown structure.</li>
+<li><strong>Publishing</strong>: Uploading the final content directly to Tistory via API.</li>
+</ol>
+<hr />
+<h2>Key Features</h2>
+<h3>1. Grounded Truth with RAG</h3>
+<p>One of the biggest risks with LLM-generated content is hallucination. To mitigate this, the pipeline strictly enforces a <strong>Retrieval-Augmented Generation</strong> workflow. The writing agent is constrained to use only facts retrieved from the knowledge base (Markdown files, PDFs, technical documentation), ensuring the output is technically accurate and verifiable.</p>
+<h3>2. Multi-Agent Collaboration</h3>
+<p>Rather than asking one model to "write a blog post," the task is decomposed into specialized roles:
+*   <strong>Researcher</strong>: Finds the data.
+*   <strong>Writer</strong>: Crafts the narrative.
+*   <strong>Critic</strong>: Acts as the editor, checking for redundancy and logical gaps.
+*   <strong>Publisher</strong>: Handles the platform integration.</p>
+<h3>3. Quality Assurance Loop</h3>
+<p>The <strong>Critic Agent</strong> is the gatekeeper. It evaluates the draft against a set of quality metrics. If the content is too repetitive or lacks depth, the pipeline loops back to the writing stage with specific feedback, mimicking a real editorial process.</p>
+<hr />
+<h2>Tech Stack</h2>
+<ul>
+<li><strong>LangChain</strong>: The framework for interacting with LLMs.</li>
+<li><strong>LangGraph</strong>: For building the stateful, multi-actor application graph.</li>
+<li><strong>OpenAI GPT-4</strong>: The underlying intelligence for the agents.</li>
+<li><strong>FAISS</strong>: Vector store for efficient similarity search.</li>
+<li><strong>Tistory API</strong>: For automated publishing.</li>
+</ul>
+<hr />
+<h2>Conclusion</h2>
+<p>The Automated Blog Content Pipeline demonstrates that AI can be more than just a writing assistant—it can be a comprehensive workflow engine. By combining RAG for accuracy with LangGraph for control, we can automate the tedious parts of content creation while maintaining high standards of quality.</p>
+    </article>
+  </main>
+
+  <footer>
+    © 2026 June Hong — Built with plain HTML & CSS
+  </footer>
+
+</body>
+</html>

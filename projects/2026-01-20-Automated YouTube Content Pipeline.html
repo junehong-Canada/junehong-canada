@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building an Automated YouTube Content Pipeline with LangGraph – June Hong</title>
+  <meta name="description" content="A deep dive into building an end-to-end automated content generation pipeline that plans, generates, produces, and uploads YouTube videos using LangGraph.">
+  <meta name="author" content="June Hong">
+  <link rel="icon" type="image/png" href="../assets/images/JHD.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5789326916093083"
+     crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">
+        <img src="../assets/images/JHD.png" alt="JH" class="monogram" />
+        <span>June Hong, Dominicus</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../blog.html">Blog</a>
+        <a href="https://github.com/junehong-dominicus" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/junehong-dominicus/" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Header -->
+  <header class="article-header">
+    <h1>Building an Automated YouTube Content Pipeline with LangGraph</h1>
+    <div class="article-meta">
+      By June Hong • <time>2026-01-20</time>
+    </div>
+  </header>
+
+  <main>
+    <article>
+      <!-- Manual Ad Unit Container -->
+      <!-- Replace data-ad-slot value with your specific ID from AdSense -->
+      <div style="margin-bottom: 2rem; text-align: center; min-height: 100px;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-5789326916093083"
+             data-ad-slot="1816196154"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+      <h2>Introduction</h2>
+<p>Creating high-quality video content consistently is a challenge. Between scripting, recording voiceovers, sourcing visuals, editing, and managing metadata, a single YouTube video can take hours or even days to complete.</p>
+<p>To solve this, I built the <strong>Automated Weekly YouTube Content Pipeline</strong>—an intelligent system designed to plan, generate, produce, and upload YouTube videos (both Long-form and Shorts) with minimal human intervention. Unlike simple script generation tools, this project leverages <strong>LangGraph</strong> for stateful orchestration to handle the entire production lifecycle.</p>
+<p>In this post, I'll break down the architecture and key components of this autonomous publishing system.</p>
+<hr />
+<h2>The Architecture: Orchestrating the Studio</h2>
+<p>The core of the system is built on <strong>LangGraph</strong>, which allows us to define a graph-based workflow where a typed <code>VideoState</code> is passed between nodes. This ensures reliability and allows for complex logic like branching for different content types.</p>
+<p>Here is the high-level flow:</p>
+<ol>
+<li><strong>Topic Planner</strong>: Selects or validates the topic for the week.</li>
+<li><strong>Content Router</strong>: Determines if the content should be a Short, Long-form video, or both.</li>
+<li><strong>Generators</strong>: Parallel execution of specialized tasks:<ul>
+<li><strong>Scripting</strong>: Generates structured scripts (Hook, Body, CTA).</li>
+<li><strong>Voice</strong>: Converts text to speech using TTS integration.</li>
+<li><strong>Visuals</strong>: Generates or retrieves assets aligned with script sections.</li>
+</ul>
+</li>
+<li><strong>Composer</strong>: Assembles media assets and voiceovers into a final MP4 video using MoviePy/FFmpeg.</li>
+<li><strong>Metadata Generator</strong>: Creates SEO-optimized titles, descriptions, and tags.</li>
+<li><strong>Uploader</strong>: Uploads the final video to YouTube via the Data API v3.</li>
+</ol>
+<hr />
+<h2>Key Features</h2>
+<h3>1. Dual Mode Support</h3>
+<p>The pipeline isn't limited to one format. It intelligently routes content creation to support <strong>Long-form videos</strong>, <strong>YouTube Shorts</strong>, or both simultaneously. This allows for a comprehensive content strategy that leverages the discoverability of Shorts and the depth of long-form content.</p>
+<h3>2. AI-Driven Content Creation</h3>
+<p>The system acts as a full production team:
+*   <strong>Scriptwriter</strong>: Crafts engaging scripts with proper structure.
+*   <strong>Voice Actor</strong>: Generates natural-sounding voiceovers.
+*   <strong>Visual Artist</strong>: Creates or fetches relevant imagery.
+*   <strong>SEO Specialist</strong>: Optimizes metadata for search rankings.</p>
+<h3>3. Resumable Architecture</h3>
+<p>One of the biggest challenges in automation is handling failures. By using LangGraph's stateful execution, the pipeline is <strong>resumable</strong>. If an API call fails or a render crashes, the system can retry specific nodes or resume from the last successful state without restarting the entire process.</p>
+<hr />
+<h2>Tech Stack</h2>
+<ul>
+<li><strong>LangGraph</strong>: For building the stateful, graph-based application.</li>
+<li><strong>Python 3.10+</strong>: The core programming language.</li>
+<li><strong>MoviePy / FFmpeg</strong>: For programmatic video editing and composition.</li>
+<li><strong>YouTube Data API v3</strong>: For automated uploading and metadata management.</li>
+<li><strong>OpenAI</strong>: For script generation and metadata optimization.</li>
+</ul>
+<hr />
+<h2>Conclusion</h2>
+<p>The Automated YouTube Content Pipeline demonstrates that AI can be more than just a helper—it can be a comprehensive production engine. By combining generative AI for content creation with LangGraph for robust orchestration, we can automate the labor-intensive parts of video production while maintaining consistency and quality.</p>
+    </article>
+  </main>
+
+  <footer>
+    © 2026 June Hong — Built with plain HTML & CSS
+  </footer>
+
+</body>
+</html>
