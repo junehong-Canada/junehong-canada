@@ -1,6 +1,22 @@
-# junehong.github.io
+# June Hong
 
-Personal portfolio and blog website for June Hong.
+## Introduction
+
+June Hong is a software architect, technical leader, and innovator focused on
+the convergence of **Physical AI, Edge AI, Digital Twins, and LLM systems**.
+With more than 20 years of experience across embedded systems, cloud-native
+platforms, mobile devices, and AI-driven cyber-physical systems, he designs
+reliable software that connects intelligent models with real-world operations.
+
+His current work includes cognitive layers for industrial assets, stateful
+Digital Twin models, LangChain and LangGraph agent workflows, retrieval-
+augmented generation (RAG), and quantized AI models running on edge hardware.
+His career includes engineering and leadership work with organizations such as
+Samsung, NTT, NEC, and VTech.
+
+This repository contains June's personal portfolio, technical projects, blog,
+marketing materials, and supporting resources. The site is built with plain
+HTML, CSS, Markdown, and Python build scripts.
 
 ## Project Structure
 
@@ -56,3 +72,11 @@ This will:
 1.  Install Python dependencies (`markdown`, `pyyaml`).
 2.  Convert all `.md` files in `posts/` to `.html` using the `templates/post.html` template.
 3.  Update `blog.html` with the list of posts, sorted by date.
+
+## Homepage Hosting
+
+The homepage is deployed to GitHub Pages by
+`.github/workflows/deploy-pages.yml` whenever changes are pushed to `main`.
+To enable the first deployment, open the repository's **Settings > Pages** and
+set **Source** to **GitHub Actions**. The workflow can also be started manually
+from the **Actions** tab.
