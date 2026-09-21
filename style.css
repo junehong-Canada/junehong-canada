@@ -465,6 +465,25 @@ article {
   margin-top: 1.25rem;
 }
 
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--primary);
+  background: var(--primary-dim);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
 article img {
   width: 100%;
   border-radius: var(--radius-md);

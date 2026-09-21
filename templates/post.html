@@ -8,212 +8,10 @@
   <meta name="author" content="{{ author }}">
   <link rel="icon" type="image/png" href="../assets/images/JHD.png">
 
-  <style>
-    /* Global */
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: #f9fafb;
-      color: #111827;
-      line-height: 1.6;
-    }
-
-    a {
-      color: #2563eb;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    /* Navigation */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background-color: rgba(249, 250, 251, 0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid #e5e7eb;
-    }
-
-    .nav-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0.75rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .nav-brand {
-      font-weight: 600;
-      font-size: 1.1rem;
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      color: #111827;
-    }
-    
-    .nav-brand:hover {
-      text-decoration: none;
-    }
-
-    .monogram {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      background-color: #2563eb;
-      color: white;
-      border-radius: 6px;
-      margin-right: 0.5rem;
-      font-size: 0.9rem;
-      font-weight: 700;
-    }
-
-    .nav-links a {
-      margin-left: 1.5rem;
-      font-size: 0.95rem;
-      color: #374151;
-      text-decoration: none;
-    }
-
-    .nav-links a:hover {
-      color: #111827;
-    }
-
-    /* Article Header */
-    header.article-header {
-      padding: 4rem 1.5rem 2rem;
-      max-width: 740px;
-      margin: 0 auto;
-      text-align: left;
-    }
-
-    .article-header h1 {
-      font-size: 2.2rem;
-      margin-bottom: 0.5rem;
-      line-height: 1.3;
-      color: #111827;
-    }
-
-    .article-meta {
-      color: #6b7280;
-      font-size: 0.95rem;
-      margin-top: 1rem;
-    }
-
-    /* Main Content */
-    main {
-      max-width: 740px;
-      margin: 0 auto;
-      padding: 0 1.5rem 4rem;
-    }
-
-    article {
-      font-size: 1.05rem;
-      color: #374151;
-    }
-
-    article h2 {
-      margin-top: 2.5rem;
-      margin-bottom: 1rem;
-      color: #111827;
-      font-size: 1.5rem;
-    }
-
-    article h3 {
-      margin-top: 2rem;
-      margin-bottom: 0.75rem;
-      color: #111827;
-      font-size: 1.25rem;
-    }
-
-    article p {
-      margin-bottom: 1.5rem;
-    }
-
-    article ul, article ol {
-      margin-bottom: 1.5rem;
-      padding-left: 1.5rem;
-    }
-
-    article li {
-      margin-bottom: 0.5rem;
-    }
-
-    article blockquote {
-      border-left: 4px solid #2563eb;
-      margin: 1.5rem 0;
-      padding-left: 1rem;
-      font-style: italic;
-      color: #4b5563;
-      background-color: #eff6ff;
-      padding: 1rem;
-      border-radius: 0 0.5rem 0.5rem 0;
-    }
-
-    article img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 0.5rem;
-      margin: 1.5rem 0;
-    }
-    
-    article code {
-      background-color: #f3f4f6;
-      padding: 0.2rem 0.4rem;
-      border-radius: 0.25rem;
-      font-size: 0.9em;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      color: #be185d;
-    }
-
-    article pre {
-      background-color: #1f2937;
-      color: #f9fafb;
-      padding: 1rem;
-      border-radius: 0.5rem;
-      overflow-x: auto;
-      margin: 1.5rem 0;
-    }
-
-    article pre code {
-      background-color: transparent;
-      color: inherit;
-      padding: 0;
-      font-size: 0.9em;
-    }
-    
-    article table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1.5rem 0;
-    }
-    
-    article th, article td {
-      border: 1px solid #e5e7eb;
-      padding: 0.75rem;
-      text-align: left;
-    }
-    
-    article th {
-      background-color: #f9fafb;
-      font-weight: 600;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      color: #6b7280;
-      font-size: 0.9rem;
-      border-top: 1px solid #e5e7eb;
-      margin-top: 2rem;
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5789326916093083"
      crossorigin="anonymous"></script>
 </head>
@@ -261,12 +59,18 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
       </div>
       {{ article_content }}
-      {{ content }}
     </article>
   </main>
 
   <footer>
-    © 2026 June Hong — Built with plain HTML & CSS
+    <div class="footer-links">
+      <a href="../index.html">Home</a> |
+      <a href="../projects.html">Projects</a> |
+      <a href="../blog.html">Blog</a> |
+      <a href="../marketing.html">Marketing</a> |
+      <a href="../privacy-policy.html">Privacy Policy</a>
+    </div>
+    <p>© 2026 June Hong — Built with plain HTML & CSS</p>
   </footer>
 
 </body>

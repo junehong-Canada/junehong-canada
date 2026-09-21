@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Traditional Algorithms vs. Edge AI Models: Choosing the Right Approach at the Edge – June Hong</title>
+  <meta name="description" content="Not every problem on a microcontroller needs a neural network. A practical framework for deciding between threshold rules, classical DSP, and quantized ML models at the extreme edge.">
+  <meta name="author" content="June Hong">
+  <link rel="icon" type="image/png" href="../assets/images/JHD.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5789326916093083"
+     crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">
+        <img src="../assets/images/JHD.png" alt="JH" class="monogram" />
+        <span>June Hong, Dominicus</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../blog.html">Blog</a>
+        <a href="https://github.com/junehong-dominicus" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/junehong-dominicus/" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Header -->
+  <header class="article-header">
+    <h1>Traditional Algorithms vs. Edge AI Models: Choosing the Right Approach at the Edge</h1>
+    <div class="article-meta">
+      By June Hong • <time>2026-09-21</time>
+      <span> • 5 min read</span>
+    </div>
+    <div class="tags-container"><span class="tag">Edge AI</span><span class="tag">Physical AI</span><span class="tag">Embedded Systems</span><span class="tag">Machine Learning</span></div>
+  </header>
+
+  <main>
+    <article>
+      <!-- Manual Ad Unit Container -->
+      <!-- Replace data-ad-slot value with your specific ID from AdSense -->
+      <div style="margin-bottom: 2rem; text-align: center; min-height: 100px;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-5789326916093083"
+             data-ad-slot="1816196154"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+      <h2>Introduction</h2>
+<p>Every few weeks I get asked some version of the same question: <em>"Should this run as a neural network, or can a simple threshold do the job?"</em></p>
+<p>It's a fair question, and on a microcontroller the answer has real consequences — flash budget, inference latency, power draw, and whether you can explain to a safety auditor exactly why the system made the decision it made. This post is the decision framework I actually use when architecting sensor-driven firmware for industrial safety systems: when to reach for a classical algorithm, when to reach for a quantized model, and when the right answer is both.</p>
+<h2>What "Traditional" Means at the Edge</h2>
+<p>"Traditional algorithm" isn't a dismissal — it covers a wide, well-understood toolbox:</p>
+<ul>
+<li><strong>Threshold and hysteresis logic</strong> — the workhorse of alarm systems. Fixed or slowly-adapting limits with debounce to avoid chatter.</li>
+<li><strong>Finite state machines</strong> — deterministic transitions between known operating modes.</li>
+<li><strong>Classical DSP</strong> — moving averages, FFT-based frequency analysis, Kalman filters for sensor fusion.</li>
+<li><strong>PID and control-loop math</strong> — well-characterized, decades of tooling, easy to simulate before deployment.</li>
+</ul>
+<p>These share three properties that matter enormously in industrial firmware: they are <strong>deterministic</strong>, <strong>cheap to run</strong>, and <strong>easy to certify</strong> — you can write down exactly why the system tripped, which matters when the output drives a fire suppression relay.</p>
+<h2>What "Edge AI" Means Here</h2>
+<p>By Edge AI I mean models small enough to run directly on the MCU doing the sensing — not "AI in the cloud, edge just forwards data." On something like an ESP32-WROVER-E, that typically means:</p>
+<ul>
+<li><strong>Quantized TensorFlow Lite Micro models</strong> — INT8 weights, a few hundred KB of arena, running in single-digit milliseconds per inference.</li>
+<li><strong>Small recurrent or convolutional architectures</strong> (GRUs, 1D-CNNs) — suited to time-series sensor windows rather than single readings.</li>
+<li><strong>On-device feature extraction</strong> feeding a lightweight classifier, rather than raw streams feeding a large model.</li>
+</ul>
+<p>The appeal isn't "AI is smarter." It's that some failure signatures genuinely don't reduce to a clean threshold — a bearing that's <em>beginning</em> to fail doesn't cross a fixed vibration limit, it develops a shape over time that a model can learn and a human can't easily hand-code.</p>
+<h2>The Comparison</h2>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Traditional Algorithm</th>
+<th>Edge AI Model</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Latency</td>
+<td>Microseconds to low milliseconds</td>
+<td>Milliseconds (quantized, MCU-class)</td>
+</tr>
+<tr>
+<td>Memory footprint</td>
+<td>Bytes to a few KB</td>
+<td>Tens of KB to low MB (arena + weights)</td>
+</tr>
+<tr>
+<td>Power draw</td>
+<td>Minimal</td>
+<td>Higher, but still edge-viable when quantized</td>
+</tr>
+<tr>
+<td>Explainability</td>
+<td>Fully traceable — "X exceeded Y for Z seconds"</td>
+<td>Post-hoc at best; hard to certify a "why"</td>
+</tr>
+<tr>
+<td>Handles novel/gradual patterns</td>
+<td>Poorly — requires a human to define the rule</td>
+<td>Well — learns shape from labeled data</td>
+</tr>
+<tr>
+<td>Development cost</td>
+<td>Low, fast to iterate and simulate</td>
+<td>Higher — needs a labeled dataset and a training pipeline</td>
+</tr>
+<tr>
+<td>Behavior under sensor noise/drift</td>
+<td>Brittle unless carefully tuned</td>
+<td>More robust if trained on representative noise</td>
+</tr>
+<tr>
+<td>Regulatory/safety review</td>
+<td>Straightforward</td>
+<td>Requires additional validation evidence</td>
+</tr>
+</tbody>
+</table>
+<p>Neither column wins outright. The table is a set of trade-offs to weigh against what the system actually has to do.</p>
+<h2>A Practical Decision Framework</h2>
+<p>I use four questions, roughly in this order:</p>
+<ol>
+<li><strong>Does a human domain expert already know the rule?</strong> If a fire-safety engineer can tell you "smoke obscuration above X% for more than Y seconds is unsafe," that's a threshold, not a model. Don't spend a training pipeline re-deriving knowledge you already have.</li>
+<li><strong>Does the failure mode drive a safety-critical action?</strong> If the output directly triggers suppression, shutdown, or an alarm relay, I default to deterministic logic for the <em>decision</em>, even if a model contributes a <em>signal</em> upstream of it.</li>
+<li><strong>Is the pattern gradual, multivariate, or hard to hand-specify?</strong> Bearing wear, motor imbalance, slow refrigerant leaks — these develop across several correlated channels over time. That's the model's home turf.</li>
+<li><strong>What's the cost of a false negative vs. a false positive, and can you afford the model's calibration overhead to tune that trade-off?</strong> Rules are easy to make conservative. Models need a labeled dataset that actually represents your failure distribution, which is often the real cost, not the inference itself.</li>
+</ol>
+<h2>The Answer Is Usually Both</h2>
+<p>In practice, the systems I've shipped don't pick one column — they split responsibilities across a hard boundary. On a dual-core ESP32 industrial gateway, that looks like:</p>
+<ul>
+<li><strong>The deterministic core</strong> owns protocol polling, safety thresholds, and anything that has to happen on a guaranteed schedule — Modbus/BACnet polling, hard alarm limits, watchdog-safe isolation.</li>
+<li><strong>The inference core</strong> runs a quantized model against a rolling window of sensor features, purely to <em>flag anomalies for attention</em> — it never has direct authority over a suppression action.</li>
+<li>Rules still gate the final decision. The model's job is to catch the failure mode the rule-writer didn't think to encode, and hand it to a human — or to a rule — with enough lead time to matter.</li>
+</ul>
+<p>That separation is what makes the AI half auditable: you can point to the exact rule that triggered an action, while still benefiting from a model that's watching for the pattern nobody wrote a threshold for.</p>
+<h2>Conclusion</h2>
+<p>The question isn't "rules or AI." It's "what does each part of this system actually need to guarantee, and which tool gives me that guarantee at the lowest cost." Deterministic logic stays the backbone of anything safety-critical. Edge AI earns its place specifically where the failure signature is too gradual, too multivariate, or too novel for a human to hand-write a clean rule — and it earns that place <em>alongside</em> the rules, not instead of them.</p>
+    </article>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="../index.html">Home</a> |
+      <a href="../projects.html">Projects</a> |
+      <a href="../blog.html">Blog</a> |
+      <a href="../marketing.html">Marketing</a> |
+      <a href="../privacy-policy.html">Privacy Policy</a>
+    </div>
+    <p>© 2026 June Hong — Built with plain HTML & CSS</p>
+  </footer>
+
+</body>
+</html>
