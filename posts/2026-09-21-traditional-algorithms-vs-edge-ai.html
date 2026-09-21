@@ -40,7 +40,7 @@
     <h1>Traditional Algorithms vs. Edge AI Models: Choosing the Right Approach at the Edge</h1>
     <div class="article-meta">
       By June Hong • <time>2026-09-21</time>
-      <span> • 5 min read</span>
+      <span> • 8 min read</span>
     </div>
     <div class="tags-container"><span class="tag">Edge AI</span><span class="tag">Physical AI</span><span class="tag">Embedded Systems</span><span class="tag">Machine Learning</span></div>
   </header>
@@ -147,6 +147,66 @@
 <li>Rules still gate the final decision. The model's job is to catch the failure mode the rule-writer didn't think to encode, and hand it to a human — or to a rule — with enough lead time to matter.</li>
 </ul>
 <p>That separation is what makes the AI half auditable: you can point to the exact rule that triggered an action, while still benefiting from a model that's watching for the pattern nobody wrote a threshold for.</p>
+<h2>Guardrails: Protecting Against a Wrong Model Decision in Critical Cases</h2>
+<p>Deciding a problem genuinely needs a model is only half the job. The other half is making sure a wrong prediction never becomes a safety incident. On systems where the output drives a suppression relay, a shutdown, or anything else with real consequences, I treat the model as an <strong>advisor, never the sole authority</strong> — and I enforce that with specific guardrails, not good intentions:</p>
+<ul>
+<li><strong>Keep a deterministic hard limit as the final veto.</strong> The model can raise or lower confidence, but a hard-coded, provable safety limit still has independent authority to trigger — and to block a model-driven action that would violate it. If the model says "safe" but the hard limit says the reading is out of range, the hard limit wins.</li>
+<li><strong>Require a confidence threshold, and define what happens below it.</strong> Don't act on a raw class label — act on "class X with confidence ≥ N." Below that threshold, the system doesn't guess; it falls back to the traditional algorithm or escalates for review.</li>
+<li><strong>Demand temporal consistency, not a single inference.</strong> A single high-confidence frame can be a sensor glitch. Require the model to agree across several consecutive windows (an N-of-M pattern) before a critical action fires — the same debounce principle a threshold system already uses, applied to model output.</li>
+<li><strong>Bound the action, not just the confidence.</strong> Whatever the model outputs, clamp the resulting action to a physically plausible envelope. A model shouldn't be able to command a state the hardware or the safety case never anticipated.</li>
+<li><strong>Validate the input before you trust the output.</strong> Detect out-of-range sensor values, stuck sensors, and inputs far outside the training distribution before they reach the model. A model asked to classify garbage will confidently classify garbage.</li>
+<li><strong>Choose a fail-safe default, deliberately.</strong> Decide in advance what happens on model timeout, crash, or low confidence — and make that default the safe state, not "do nothing."</li>
+<li><strong>Log every decision with its inputs.</strong> You lose the traceability of an if/else chain the moment you add a model, so you have to build it back: log the feature vector, confidence, and final action for every trip so a failure can be reconstructed.</li>
+<li><strong>Ship new models in shadow mode first.</strong> Before a model gets authority over a critical action, run it in parallel with the existing deterministic system, logging what it <em>would</em> have done without acting on it. Compare the two before cutting over.</li>
+<li><strong>Monitor for drift after deployment.</strong> A model validated on last year's sensor data can quietly degrade as hardware ages or conditions shift. Track prediction confidence and agreement with the deterministic layer over time — a slow decline is a signal to retrain, not a mystery to explain later.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Guardrail</th>
+<th>Failure Mode It Prevents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Deterministic veto</td>
+<td>Model overrides a known, provable safety limit</td>
+</tr>
+<tr>
+<td>Confidence threshold + fallback</td>
+<td>Low-confidence guess treated as a certain decision</td>
+</tr>
+<tr>
+<td>N-of-M temporal consistency</td>
+<td>Single noisy frame triggers a critical action</td>
+</tr>
+<tr>
+<td>Bounded action envelope</td>
+<td>Model commands a physically implausible or unsafe state</td>
+</tr>
+<tr>
+<td>Input validation / OOD detection</td>
+<td>Model confidently misclassifies a faulty sensor reading</td>
+</tr>
+<tr>
+<td>Fail-safe default</td>
+<td>Timeout or crash silently falls back to "do nothing"</td>
+</tr>
+<tr>
+<td>Decision logging</td>
+<td>A wrong call can't be reconstructed or audited afterward</td>
+</tr>
+<tr>
+<td>Shadow-mode rollout</td>
+<td>An unproven model gets authority on day one</td>
+</tr>
+<tr>
+<td>Drift monitoring</td>
+<td>A model that degrades in production goes unnoticed</td>
+</tr>
+</tbody>
+</table>
+<p>None of this makes the model itself explainable. It makes the <strong>system around the model</strong> accountable — which is the actual requirement in a safety review. A model that's wrong 2% of the time is fine if the rest of the architecture is built to catch that 2% before it ever reaches the relay.</p>
 <h2>Conclusion</h2>
 <p>The question isn't "rules or AI." It's "what does each part of this system actually need to guarantee, and which tool gives me that guarantee at the lowest cost." Deterministic logic stays the backbone of anything safety-critical. Edge AI earns its place specifically where the failure signature is too gradual, too multivariate, or too novel for a human to hand-write a clean rule — and it earns that place <em>alongside</em> the rules, not instead of them.</p>
     </article>
