@@ -25,7 +25,7 @@ These share three properties that matter enormously in industrial firmware: they
 
 ## What "Edge AI" Means Here
 
-By Edge AI I mean models small enough to run directly on the MCU doing the sensing — not "AI in the cloud, edge just forwards data." On something like an ESP32-WROVER-E, that typically means:
+By Edge AI I mean models small enough to run directly on the MCU doing the sensing — not "AI in the cloud, edge just forwards data." On a typical low-power microcontroller, that means:
 
 - **Quantized TensorFlow Lite Micro models** — INT8 weights, a few hundred KB of arena, running in single-digit milliseconds per inference.
 - **Small recurrent or convolutional architectures** (GRUs, 1D-CNNs) — suited to time-series sensor windows rather than single readings.
@@ -59,7 +59,7 @@ I use four questions, roughly in this order:
 
 ## The Answer Is Usually Both
 
-In practice, the systems I've shipped don't pick one column — they split responsibilities across a hard boundary. On a dual-core ESP32 industrial gateway, that looks like:
+In practice, the systems I've shipped don't pick one column — they split responsibilities across a hard boundary. On a dual-core industrial gateway, that looks like:
 
 - **The deterministic core** owns protocol polling, safety thresholds, and anything that has to happen on a guaranteed schedule — Modbus/BACnet polling, hard alarm limits, watchdog-safe isolation.
 - **The inference core** runs a quantized model against a rolling window of sensor features, purely to *flag anomalies for attention* — it never has direct authority over a suppression action.

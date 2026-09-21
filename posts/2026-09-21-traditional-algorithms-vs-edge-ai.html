@@ -71,7 +71,7 @@
 </ul>
 <p>These share three properties that matter enormously in industrial firmware: they are <strong>deterministic</strong>, <strong>cheap to run</strong>, and <strong>easy to certify</strong> — you can write down exactly why the system tripped, which matters when the output drives a fire suppression relay.</p>
 <h2>What "Edge AI" Means Here</h2>
-<p>By Edge AI I mean models small enough to run directly on the MCU doing the sensing — not "AI in the cloud, edge just forwards data." On something like an ESP32-WROVER-E, that typically means:</p>
+<p>By Edge AI I mean models small enough to run directly on the MCU doing the sensing — not "AI in the cloud, edge just forwards data." On a typical low-power microcontroller, that means:</p>
 <ul>
 <li><strong>Quantized TensorFlow Lite Micro models</strong> — INT8 weights, a few hundred KB of arena, running in single-digit milliseconds per inference.</li>
 <li><strong>Small recurrent or convolutional architectures</strong> (GRUs, 1D-CNNs) — suited to time-series sensor windows rather than single readings.</li>
@@ -140,7 +140,7 @@
 <li><strong>What's the cost of a false negative vs. a false positive, and can you afford the model's calibration overhead to tune that trade-off?</strong> Rules are easy to make conservative. Models need a labeled dataset that actually represents your failure distribution, which is often the real cost, not the inference itself.</li>
 </ol>
 <h2>The Answer Is Usually Both</h2>
-<p>In practice, the systems I've shipped don't pick one column — they split responsibilities across a hard boundary. On a dual-core ESP32 industrial gateway, that looks like:</p>
+<p>In practice, the systems I've shipped don't pick one column — they split responsibilities across a hard boundary. On a dual-core industrial gateway, that looks like:</p>
 <ul>
 <li><strong>The deterministic core</strong> owns protocol polling, safety thresholds, and anything that has to happen on a guaranteed schedule — Modbus/BACnet polling, hard alarm limits, watchdog-safe isolation.</li>
 <li><strong>The inference core</strong> runs a quantized model against a rolling window of sensor features, purely to <em>flag anomalies for attention</em> — it never has direct authority over a suppression action.</li>
